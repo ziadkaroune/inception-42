@@ -72,10 +72,19 @@ services:
 volumes:
   wordpress_data:
     driver: local
+    driver_opts:
+      type: none
+      device: /home/zkaroune/data/wordpress
+      o: bind
   mariadb_data:
     driver: local
+    driver_opts:
+      type: none
+      device: /home/zkaroune/data/mariadb
+      o: bind
 
 networks:
   inception_network:
-    name:  inception_network
+    name: inception_network
     driver: bridge
+
