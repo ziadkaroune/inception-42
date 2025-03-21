@@ -1,7 +1,8 @@
 #!/bin/bash
 
-
-cd /var/www/html/
+    sed -i -e 's/listen =.*/listen = 9000/g' /etc/php/7.3/fpm/pool.d/www.conf
+   
+    cd /var/www/html/
 
 if [ ! -f "/var/www/html/wp-config.php" ]; then
     echo "Downloading WordPress source code..."
@@ -19,9 +20,7 @@ if [ ! -f "/var/www/html/wp-config.php" ]; then
     rm -rf wordpress
 
     cp wp-config-sample.php wp-config.php
-
-    # Update PHP-FPM to listen to 9000 : port
-    sed -i 's/\/run\/php\/php7.3-fpm.sock/9000/' /etc/php/7.3/fpm/pool.d/www.conf
+ 
     #connect to database with mariadb // config.php file
     sed -i "s/database_name_here/$WORDPRESS_DB_NAME/g" wp-config.php
     sed -i "s/username_here/$WORDPRESS_DB_USER/g" wp-config.php
